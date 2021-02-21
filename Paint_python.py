@@ -1,10 +1,9 @@
 import pygame
 
 WIDTH = 700
-WIDTH2 = 800
+WIDTH2 = 1000
 
 WIN1 = pygame.display.set_mode((WIDTH2, WIDTH))
-#WIN2 = pygame.display.set_mode((WIDTH2, WIDTH2))
 
 pygame.display.set_caption("Paint - Pygame")
 
@@ -28,6 +27,9 @@ class Block:
         self.width = width
         self.color = color
 
+    def setcolor(self, color):
+        self.color = color
+
     def draw(self, win):
         pygame.draw.rect(win, self.color, (self.x, self.y, self.width, self.width))
 
@@ -38,15 +40,14 @@ def draw_grid(win, rows, width):
     for j in range(rows+1):
         pygame.draw.line(win, GREY, (gap*j, 0),(gap*j, width))
 
-
-def make_BGrid(rows, width, color):
+def make_BGrid(rows, width):
     BGrid = []
     gap = width // rows
     
     for i in range(rows):
         BGrid.append([])
         for j in range(rows):
-            block = Block(i, j, gap, color)
+            block = Block(i, j, gap, WHITE)
             BGrid[i].append(block)
     return BGrid
 
@@ -55,9 +56,19 @@ def draw_BGrid(win, grid):
         for block in row:
             block.draw(win)
 
+def get_clicked_pos(pos, rows, width):
+	gap = width // rows
+	y, x = pos
+
+	row = y // gap
+	col = x // gap
+
+	return row, col
+
 def main(win):
     ROWS=50
     
+    grid = make_BGrid(ROWS, WIDTH)
     color = WHITE
 
     run = True
@@ -66,9 +77,24 @@ def main(win):
             print(event)
             if event.type == pygame.QUIT:
                 run = False
+            if pygame.mouse.get_pressed()[0]:
+                pos = pygame.mouse.get_pos()
+                row, col = get_clicked_pos(pos, ROWS, WIDTH)
+                block = grid[row][col]
+                block.setcolor(BLACK)
+            if pygame.mouse.get_pressed()[2]:
+                pos = pygame.mouse.get_pos()
+                row, col = get_clicked_pos(pos, ROWS, WIDTH)
+                block = grid[row][col]
+                block.setcolor(WHITE)
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_SPACE:
+                    for row in grid:
+                        for block in row:
+                            block.setcolor(WHITE)
+
 
         WIN1.fill(WHITE)
-        grid = make_BGrid(ROWS, WIDTH, color)
         draw_BGrid(win, grid)
         draw_grid(win, ROWS, WIDTH)
         
