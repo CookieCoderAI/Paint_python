@@ -16,19 +16,19 @@ class CBlock:
     def draw(self, win):
         pygame.draw.rect(win, self.color, (self.x, self.y, self.width, self.width))
 
-def make_CGrid(win):
+def make_CGrid(win, colorval):
     CGrid = []
     gap = 20
     
-    for i in range(18):
+    for i in range(20):
         CGrid.append([])
-        for j in range(19):
-            block = CBlock(i, j,720+gap*i,70+gap*j, gap, (80+8*i,30+3*j, 125))
+        for j in range(20):
+            block = CBlock(i, j,720+gap*i,70+gap*j, gap, (12*i,12*j, colorval))
             CGrid[i].append(block)
             print(block.col, block.row, block.x, block.y, block.width)
     return CGrid
 
 def draw_CGrid(win, grid):
-    for i in range(18):
-        for j in range(19):
+    for i in range(20):
+        for j in range(20):
             grid[i][j].draw(win)
