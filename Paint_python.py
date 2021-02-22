@@ -4,9 +4,11 @@ from CBlock import *
 from colors import *
 
 WIDTH = 700
-WIDTH2 = 1140
+WIDTHwindow = 1140
 
-WIN1 = pygame.display.set_mode((WIDTH2, WIDTH))
+WIN1 = pygame.display.set_mode((WIDTHwindow, WIDTH))
+pygame.font.init()
+font = pygame.font.SysFont('Arial', 40)
 
 pygame.display.set_caption("Paint - Pygame")
 
@@ -49,6 +51,7 @@ def main(win):
     ROWS=50
     colorval=40
     color = BLACK
+    coloradr = font.render(str(color), False, (0,0,0))
     grid = make_BGrid(ROWS, WIDTH)
     cgrid = make_CGrid(win, colorval)
 
@@ -65,6 +68,7 @@ def main(win):
                 if pygame.mouse.get_pressed()[0]:
                     pos = pygame.mouse.get_pos()
                     color = get_clicked_color(pos, cgrid)
+                    coloradr = font.render(str(color), False, (0,0,0))
             if pos[0] < 700:
                 if pygame.mouse.get_pressed()[0]:
                     pos = pygame.mouse.get_pos()
@@ -89,6 +93,7 @@ def main(win):
         draw_CGrid(win, cgrid)
         draw_colorgrid(win)
         draw_grid(win, ROWS, WIDTH)
+        win.blit(coloradr, (750,0))
         
         pygame.display.update()
 
