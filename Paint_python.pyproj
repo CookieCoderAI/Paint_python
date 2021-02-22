@@ -21,6 +21,15 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Block.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="CBlock.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="colors.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Paint_python.py" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
