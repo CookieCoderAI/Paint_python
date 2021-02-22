@@ -23,7 +23,7 @@ def make_CGrid(win, colorval):
     for i in range(20):
         CGrid.append([])
         for j in range(20):
-            block = CBlock(i, j,720+gap*i,70+gap*j, gap, (12*i,12*j, colorval))
+            block = CBlock(i, j,720+gap*i,70+gap*j, gap, (int(13.47*i),int(13.47*j), colorval))
             CGrid[i].append(block)
             print(block.col, block.row, block.x, block.y, block.width)
     return CGrid
