@@ -2,6 +2,7 @@ import pygame
 from Block import *
 from CBlock import *
 from colors import *
+from pngdrive import *
 
 WIDTH = 700
 WIDTHwindow = 1140
@@ -10,7 +11,7 @@ WIN1 = pygame.display.set_mode((WIDTHwindow, WIDTH))
 pygame.font.init()
 font = pygame.font.SysFont('Arial', 40)
 
-pygame.display.set_caption("Piotr - Pygame")
+pygame.display.set_caption("Paint - Pygame")
 
 def draw_grid(win, rows, width):
     gap = width // rows
@@ -130,5 +131,6 @@ def main(win):
         WIN1.fill(WHITE)
         draw(win, grid, cgrid, no, coloradr, ROWS)
         pygame.display.update()
+    save(grid, ROWS, WIDTH)
 
 main(WIN1)
